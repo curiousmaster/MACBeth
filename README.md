@@ -9,6 +9,7 @@ This script generates a SQLite3 database from a CSV file.
     
 ### Infile
 The csv file should have three columns
+
     OUI;Company;Address
 
 See: https://regauth.standards.ieee.org/standards-ra-web/pub/view.html#registries
