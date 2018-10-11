@@ -2,9 +2,11 @@
 MACBeth is a quick hack to do local MAC Address lookups without external dependencies.
 ## populate.py
 This script generates a SQLite3 database from a CSV file.
-    ./populate.py {file}'''
 
-    make {csv=file.py}'''
+    ./populate.py {file}
+
+    make {csv=file.py}
+    
 ### Infile
 The csv file should have three columns
     OUI;Company;Address
