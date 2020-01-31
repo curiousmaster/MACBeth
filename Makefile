@@ -1,2 +1,0 @@
-all:
-	./populate.py $(csv)

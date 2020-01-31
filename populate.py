@@ -13,6 +13,7 @@
 
 import sys
 import sqlite3
+import csv
 import re
 import os.path
 
@@ -52,18 +53,19 @@ def main(argv):
         C.execute(sql)
 
         with open(csvfile, "r") as f:
-            for line in f:
-                line = line.strip()
-                oui, company, address = line.split(";")
-                company = re.sub("[\"]", "", company)
-                company = company.strip()
-    
+            reader = csv.reader(f)
+            for line in reader:
+                if len(line) == 3:
+                    oui, company, address = line
+                else:
+                    head, oui, company, address = line
+
                 if company == "Private":
                     address = ""
-    
-                else:
-                    address = re.sub("[\"]", "", address)
-                    address = address.strip()
+
+                oui = oui.strip()
+                company = company.replace('"', '').strip()
+                address = address.replace('"', '').strip()
     
                 sql = "INSERT INTO oui (company, oui, address) VALUES (\"{company}\", \"{oui}\", \"{address}\");".format(company=company, oui=oui, address=address)
                 try:

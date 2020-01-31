@@ -65,18 +65,21 @@ def main(argv):
 
     if ARGS['oui']:
         sql = "SELECT * from oui WHERE oui like '%{oui}%';".format(oui=OUI)
-        C.execute(sql)
-        ret = C.fetchall()
-        output = []
-        for r in ret:
-            oui = r['oui']
-            company = r['company'].encode('utf8')
-            address = r['address'].encode('utf8')
-            output.append([
-                oui,
-                company,
-                address
-                ])
+    if ARGS['company']:
+        sql = "SELECT * from oui WHERE company like '%{company}%';".format(company=COMPANY)
+
+    C.execute(sql)
+    ret = C.fetchall()
+    output = []
+    for r in ret:
+        oui = r['oui']
+        company = r['company'].encode('utf8')
+        address = r['address'].encode('utf8')
+        output.append([
+            oui,
+            company,
+            address
+            ])
 
         print(tabulate.tabulate(output, headers=["OUI", "COMPANY", "ADDRESS"], tablefmt="simple"))
 
